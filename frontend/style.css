@@ -1,0 +1,19 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+img {
+  max-width: 100px;
+  border-radius: 5px;
+}
+
+div {
+  margin: 10px 0;
+}
