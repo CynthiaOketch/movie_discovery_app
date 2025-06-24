@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Watchlist</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>My Watchlist</h1>
+  <div id="watchlist"></div>
+  <script>
+    const list = JSON.parse(localStorage.getItem('watchlist') || '[]');
+    const container = document.getElementById('watchlist');
+    list.forEach(movie => {
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" />
+        <p>${movie.title}</p>
+      `;
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>
