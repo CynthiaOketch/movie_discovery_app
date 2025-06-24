@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Details</h1>
+  <div id="movieDetail"></div>
+  <script>
+    const id = localStorage.getItem('selectedMovieId');
+    fetch(`/api/details?id=${id}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('movieDetail').innerHTML = `
+          <h2>${data.title}</h2>
+          <img src="https://image.tmdb.org/t/p/w300${data.poster_path}" />
+          <p>${data.overview}</p>
+          <p><strong>Release:</strong> ${data.release_date}</p>
+          <button onclick="addToWatchlist(${JSON.stringify(data)})">Add to Watchlist</button>
+        `;
+      });
+
+    function addToWatchlist(movie) {
+      let list = JSON.parse(localStorage.getItem('watchlist') || '[]');
+      if (!list.find(m => m.id === movie.id)) {
+        list.push(movie);
+        localStorage.setItem('watchlist', JSON.stringify(list));
+      }
+    }
+  </script>
+</body>
+</html>
